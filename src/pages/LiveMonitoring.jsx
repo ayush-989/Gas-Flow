@@ -336,9 +336,31 @@ const LiveMonitoring = () => {
   const [apiKey, setApiKey] = useState(null);
 
   useEffect(() => {
-    getGoogleMapKey().then(key => {
-      if (key) setApiKey(key);
-    });
+    const fetchKey = async () => {
+      try {
+        const key = await getGoogleMapKey();
+        if (key) {
+          setApiKey(key);
+        } else {
+          // Check direct env variable as final fallback
+          const directKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+          if (directKey) {
+            console.log('Using direct API key from environment');
+            setApiKey(directKey);
+          } else {
+            console.error('No Google Maps API key found');
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching map key:', error);
+        // Try direct env variable on error
+        const directKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+        if (directKey) {
+          setApiKey(directKey);
+        }
+      }
+    };
+    fetchKey();
   }, []);
 
   if (!apiKey) {
