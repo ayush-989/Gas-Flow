@@ -285,7 +285,7 @@ const LiveMonitoringContent = ({ apiKey }) => {
                     position={{ lat: driver.latitude, lng: driver.longitude }}
                     onClick={() => setSelectedDriver(driver)}
                     icon={{
-                      url: import.meta.env.VITE_GOOGLE_MAP_ICONS_URL || "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                      url: `${import.meta.env.VITE_GOOGLE_MAP_ICONS_URL || 'http://maps.google.com/mapfiles/ms/icons'}/blue-dot.png`
                     }}
                   />
                 ))}
@@ -317,7 +317,7 @@ const LiveMonitoringContent = ({ apiKey }) => {
                   <Marker
                     position={{ lat: searchResult.lat, lng: searchResult.lng }}
                     icon={{
-                      url: import.meta.env.VITE_GOOGLE_MAP_ICONS_URL || "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                      url: `${import.meta.env.VITE_GOOGLE_MAP_ICONS_URL || 'http://maps.google.com/mapfiles/ms/icons'}/red-dot.png`
                     }}
                   />
                 )}
